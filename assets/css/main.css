@@ -178,6 +178,10 @@ h6 {
   .header .logo h1 {
     font-size: 24px;
   }
+
+  .hero .hero-img{
+    max-width: 350px;
+  }
 }
 
 .header .btn-getstarted,
@@ -380,6 +384,9 @@ h6 {
     opacity: 1;
     top: 100%;
     visibility: visible;
+  }
+  .whishlist-text{
+    line-height: 2.7;
   }
 }
 
@@ -972,6 +979,12 @@ section,
   .hero .btn-get-started,
   .hero .btn-watch-video {
     font-size: 13px;
+  }
+  .justify-content-around{
+    flex-direction: column;
+  }
+  .justify-content-around div h1{
+    padding: 20px;
   }
 }
 
