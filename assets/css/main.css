@@ -939,6 +939,47 @@ section,
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
 }
+.hero .btn-ingresa-plataforma,
+a.btn-ingresa-plataforma {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  font-family: var(--heading-font);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 50px;
+  transition: 0.5s;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+}
+
+.hero .btn-ingresa-plataforma:hover,
+a.btn-ingresa-plataforma:hover {
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo outline (por ejemplo para indicar un estado “deshabilitado”) */
+.hero .btn-ingresa-plataforma-outline,
+a.btn-ingresa-plataforma-outline {
+  color: var(--accent-color);
+  background: transparent;
+  font-family: var(--heading-font);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 50px;
+  border: 2px solid var(--accent-color);
+  transition: 0.5s;
+  /* Si deseas que realmente no se pueda clicar: */
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 
 .hero .btn-watch-video {
   font-size: 16px;
@@ -2023,13 +2064,27 @@ section,
   justify-content: center;
 }
 
+/* 
 .btn-group .btn {
   border-radius: 30px !important;
   margin: 0 5px;
-}
+} */
 
 .btn.active {
   background: #007bff;
   color: white !important;
 }
 
+.btn-group .btn {
+  border-radius: 30px !important;
+  margin: 0 5px;
+}
+
+/* El estado :checked + label de Bootstrap 
+   ya aplica la clase :active. 
+   Si quieres reforzarlo o cambiar color: */
+.btn-check:checked + .btn.btn-outline-primary {
+  background-color: #007bff;
+  color: #fff !important;
+  border-color: #007bff;
+}

@@ -16,7 +16,9 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -60,42 +62,50 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
-      <div class="hero-bg">
-        <img src="assets/img/hero-bg-light.webp" alt="">
-      </div>
       <div class="container text-center">
         <div class="d-flex flex-column justify-content-center align-items-center">
           <img src="assets/img/logo.png" class="hero-img mb-3" alt="" data-aos="zoom-out" data-aos-delay="300">
           <!-- <h1 data-aos="fade-up"><span>Cannabica</span></h1> -->
-          <p data-aos="fade-up" data-aos-delay="100">Plataforma open source para el seguimiento y planificación de cultivos indoor.<br></p>
+          <p data-aos="fade-up" data-aos-delay="100">Plataforma open source para el seguimiento y planificación de
+            cultivos indoor.<br></p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="#whishlist" class="btn-get-started">Registrate</a>
+            <a href="#whishlist" class="btn-get-started mx-3">Registrate</a>
+            <a href="#" class="btn-ingresa-plataforma-outline disabled">Ingresar a la plataforma</a>
           </div>
         </div>
       </div>
 
     </section><!-- /Hero Section -->
-    
+
     <section id="screenshots" class="screenshots secondary-background section p-3">
 
       <div class="container my-3">
-        <div class="section-title" data-aos="fade-up">
+        <div class="section-title my-3" data-aos="fade-up">
           <h2>Capturas</h2>
           <p>Explora la plataforma en sus diferentes versiones y temas</p>
         </div>
-    
-        <!-- Controls -->
-        <div class="carousel-controls text-center mb-4">
-          <div class="btn-group mb-3" role="group">
-            <button type="button" class="btn btn-outline-primary btn-device active" data-device="web">Web</button>
-            <button type="button" class="btn btn-outline-primary btn-device" data-device="mobile">Móvil</button>
+        <!-- Contenedor de controles -->
+        <div class="carousel-controls text-center">
+
+          <!-- Switch para elegir entre Web / Móvil -->
+          <div class="form-check form-switch">
+
+            <input class="form-check-input" type="checkbox" role="switch" id="deviceSwitch">
+            <label class="form-check-label" for="deviceSwitch">
+              Vista de celular
+            </label>
           </div>
-          <div class="btn-group mb-3" role="group">
-            <button type="button" class="btn btn-outline-primary btn-theme active" data-theme="light">Claro</button>
-            <button type="button" class="btn btn-outline-primary btn-theme" data-theme="dark">Oscuro</button>
+
+          <!-- Switch para elegir entre Claro / Oscuro -->
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="themeSwitch">
+            <label class="form-check-label" for="themeSwitch">
+              Tema oscuro
+            </label>
           </div>
+
         </div>
-    
+
         <!-- Web Carousel -->
         <div class="swiper carousel-web">
           <div class="swiper-wrapper">
@@ -133,7 +143,7 @@
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
         </div>
-    
+
         <!-- Mobile Carousel -->
         <div class="swiper carousel-mobile" style="display: none;">
           <div class="swiper-wrapper">
@@ -168,9 +178,24 @@
           <div class="swiper-button-next"></div>
         </div>
       </div>
-    
+
     </section><!-- End Screenshots Section -->
-    
+
+    <!-- Modal para mostrar imagen ampliada -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img id="modalImage" src="" alt="Imagen ampliada" class="img-fluid" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <!-- About Section -->
     <section id="about" class="about section my-6">
 
@@ -182,10 +207,14 @@
             <p class="who-we-are">Acerca del proyecto</p>
             <h3>Cannabica es una herramienta para ayudarte en tus ciclos de cultivos.</h3>
             <p class="fst-italic">
-              Creamos una plataforma open source accesible para todos los cultivadores, diseñada para simplificar el seguimiento de cultivos desde la germinación hasta la cosecha. Permite registrar cuidados, generar historiales y optimizar tus ciclos de cultivo.
+              Creamos una plataforma open source accesible para todos los cultivadores, diseñada para simplificar el
+              seguimiento de cultivos desde la germinación hasta la cosecha. Permite registrar cuidados, generar
+              historiales y optimizar tus ciclos de cultivo.
               <br>
               <br>
-              Próximamente, nos gustaría añadir funciones como trazabilidad de cosechas, alertas en tu teléfono, integración con sensores para monitorear parámetros clave y la opción de compartir datos con la comunidad para recibir feedback.
+              Próximamente, nos gustaría añadir funciones como trazabilidad de cosechas, alertas en tu teléfono,
+              integración con sensores para monitorear parámetros clave y la opción de compartir datos con la comunidad
+              para recibir feedback.
             </p>
           </div>
 
@@ -195,9 +224,9 @@
                 <img src="assets/img/about01.png" class="img-fluid" alt="">
               </div>
               <div class="col-lg-6">
-                  <div class="col-lg-12">
-                    <img src="assets/img/about02.png" class="img-fluid" alt="">
-                  </div>
+                <div class="col-lg-12">
+                  <img src="assets/img/about02.png" class="img-fluid" alt="">
+                </div>
               </div>
             </div>
 
@@ -216,12 +245,14 @@
       <!-- Section Title -->
       <div class="container section-title d-flex flex-column my-3" data-aos="fade-up">
         <h2>Unite a nuestra comunidad</h2>
-        <p>Estamos formando una comunidad activa en nuestro servidor de Discord. Comparte tus experiencias y aprende de otros cultivadores.</p>
+        <p>Estamos formando una comunidad activa en nuestro servidor de Discord. Comparte tus experiencias y aprende de
+          otros cultivadores.</p>
         <div class="container">
-          <a href="https://discord.gg/jN9Tje3eJe" class="btn-get-started m-3"><i class="bi bi-discord"></i> Sumate a discord</a>
+          <a href="https://discord.gg/jN9Tje3eJe" class="btn-get-started m-3"><i class="bi bi-discord"></i> Sumate a
+            discord</a>
         </div>
       </div><!-- End Section Title -->
-      
+
     </section><!-- /Pricing Section -->
 
     <!-- funciones Section -->
@@ -230,7 +261,8 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Funciones</h2>
-        <p>Pensamos una serie de cuidados a registrar sobre las plantas para tener un registro completo de la vida de tus plantas durante el ciclo de cultivo</p>
+        <p>Pensamos una serie de cuidados a registrar sobre las plantas para tener un registro completo de la vida de
+          tus plantas durante el ciclo de cultivo</p>
         <br>
       </div><!-- End Section Title -->
 
@@ -243,7 +275,8 @@
               <i class="bi bi-moisture icon"></i>
               <div>
                 <h3>Registro de riegos</h3>
-                <p>Sea de manera manual o automática, podrás llevar un registro de los riegos realizados a tus plantas.</p>
+                <p>Sea de manera manual o automática, podrás llevar un registro de los riegos realizados a tus plantas.
+                </p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -253,7 +286,8 @@
               <i class="bi bi-scissors icon"></i>
               <div>
                 <h3>Registro de podas</h3>
-                <p>Podas apicales, podas de ramas, podas de hojas, todas las podas que realices a tus plantas podrás registrarlas.</p>
+                <p>Podas apicales, podas de ramas, podas de hojas, todas las podas que realices a tus plantas podrás
+                  registrarlas.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -263,7 +297,8 @@
               <i class="bi bi-eyedropper icon"></i>
               <div>
                 <h3>Registrar aplicaciones</h3>
-                <p>Lleva un registro de los productos que aplicas a tus plantas, ya sean fertilizantes, insecticidas, fungicidas, etc.</p>
+                <p>Lleva un registro de los productos que aplicas a tus plantas, ya sean fertilizantes, insecticidas,
+                  fungicidas, etc.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -283,7 +318,8 @@
               <i class="bi bi-camera icon"></i>
               <div>
                 <h3>Seguimiento en imagenes</h3>
-                <p>Registra en imagenes cualquier momento con sus detalles para tener una mirada completa en el tiempo sobre la vida de tus plantas.</p>
+                <p>Registra en imagenes cualquier momento con sus detalles para tener una mirada completa en el tiempo
+                  sobre la vida de tus plantas.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -312,8 +348,10 @@
         <div>
           <h1 class="whishlist-text"">Únete a la lista de espera para el acceso anticipado</h1>
         </div>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfVCO4PoZC3v_K8cfhUZYs-itas-8CDdNrKhbl29yoVOlsj5w/viewform?usp=sharing" class="btn-lg btn-get-started m-3"><i class="bi bi-pen-fill"></i> Registrate al acceso anticipado</a>
-      </div><!-- End Section Title -->
+        <a href="
+            https://docs.google.com/forms/d/e/1FAIpQLSfVCO4PoZC3v_K8cfhUZYs-itas-8CDdNrKhbl29yoVOlsj5w/viewform?usp=sharing"
+            class="btn-lg btn-get-started m-3"><i class="bi bi-pen-fill"></i> Registrate al acceso anticipado</a>
+        </div><!-- End Section Title -->
 
     </section><!-- -->
   </main>
@@ -339,7 +377,8 @@
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
   <div id="preloader"></div>

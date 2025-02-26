@@ -6,7 +6,7 @@
 * License: https://bootstrapmade.com/license/
 */
 
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -50,7 +50,7 @@
    * Toggle mobile nav dropdowns
    */
   document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
+    navmenu.addEventListener('click', function (e) {
       e.preventDefault();
       this.parentNode.classList.toggle('active');
       this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
@@ -122,7 +122,7 @@
    * Init swiper sliders
    */
   function initSwiper() {
-    document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
+    document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
       let config = JSON.parse(
         swiperElement.querySelector(".swiper-config").innerHTML.trim()
       );
@@ -140,7 +140,7 @@
   /**
    * Correct scrolling position upon page load for URLs containing hash links.
    */
-  window.addEventListener('load', function(e) {
+  window.addEventListener('load', function (e) {
     if (window.location.hash) {
       if (document.querySelector(window.location.hash)) {
         setTimeout(() => {
@@ -179,7 +179,7 @@
 
 })();
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Inicializar Swipers
   const swiperWeb = new Swiper('.carousel-web', {
     loop: true,
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
-  
+
   const swiperMobile = new Swiper('.carousel-mobile', {
     loop: true,
     slidesPerView: 1,
@@ -228,35 +228,62 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Control de dispositivos
-  document.querySelectorAll('.btn-device').forEach(button => {
-    button.addEventListener('click', function() {
-      const device = this.dataset.device;
-      document.querySelectorAll('.btn-device').forEach(btn => btn.classList.remove('active'));
-      this.classList.add('active');
-      
-      if(device === 'web') {
-        document.querySelector('.carousel-web').style.display = 'block';
-        document.querySelector('.carousel-mobile').style.display = 'none';
-        swiperWeb.update();
-      } else {
-        document.querySelector('.carousel-web').style.display = 'none';
-        document.querySelector('.carousel-mobile').style.display = 'block';
-        swiperMobile.update();
-      }
+  // (Ahora con radio buttons en vez de .btn-device directas)
+  const deviceWebInput = document.getElementById('btn-device-web');
+  const deviceMobileInput = document.getElementById('btn-device-mobile');
+
+  function updateDeviceView() {
+    if (deviceWebInput.checked) {
+      document.querySelector('.carousel-web').style.display = 'block';
+      document.querySelector('.carousel-mobile').style.display = 'none';
+      swiperWeb.update();
+    } else {
+      document.querySelector('.carousel-web').style.display = 'none';
+      document.querySelector('.carousel-mobile').style.display = 'block';
+      swiperMobile.update();
+    }
+  }
+  const deviceSwitch = document.getElementById('deviceSwitch');
+  const themeSwitch = document.getElementById('themeSwitch');
+
+  // Evento para cambiar de Web a Móvil
+  deviceSwitch.addEventListener('change', function () {
+    if (this.checked) {
+      // Móvil
+      document.querySelector('.carousel-web').style.display = 'none';
+      document.querySelector('.carousel-mobile').style.display = 'block';
+      swiperMobile.update();
+    } else {
+      // Web
+      document.querySelector('.carousel-web').style.display = 'block';
+      document.querySelector('.carousel-mobile').style.display = 'none';
+      swiperWeb.update();
+    }
+  });
+
+  // Evento para cambiar de Claro a Oscuro
+  themeSwitch.addEventListener('change', function () {
+    const isDark = this.checked;
+    document.querySelectorAll('.swiper').forEach(swiper => {
+      swiper.classList.remove('theme-light', 'theme-dark');
+      swiper.classList.add(isDark ? 'theme-dark' : 'theme-light');
     });
   });
 
-  // Control de temas
-  document.querySelectorAll('.btn-theme').forEach(button => {
-    button.addEventListener('click', function() {
-      const theme = this.dataset.theme;
-      document.querySelectorAll('.btn-theme').forEach(btn => btn.classList.remove('active'));
-      this.classList.add('active');
-      
-      document.querySelectorAll('.swiper').forEach(swiper => {
-        swiper.classList.remove('theme-light', 'theme-dark');
-        swiper.classList.add(`theme-${theme}`);
-      });
+  // Lógica para abrir la imagen en un modal (Bootstrap)
+  const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+  const modalImage = document.getElementById('modalImage');
+
+  // Escuchar clic en todas las imágenes de Swiper
+  document.querySelectorAll('.swiper-slide img').forEach(img => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => {
+      // Obtener la URL de la imagen
+      const src = img.getAttribute('src');
+      // Asignarla al modal y mostrarlo
+      modalImage.setAttribute('src', src);
+      modal.show();
     });
   });
+
 });
