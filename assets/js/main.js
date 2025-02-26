@@ -178,3 +178,85 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Inicializar Swipers
+  const swiperWeb = new Swiper('.carousel-web', {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 30,
+    centeredSlides: true,
+    centeredSlidesBounds: true, // ayuda a no dejar espacio en blanco
+    watchOverflow: true,        // desactiva el loop si hay pocas slides
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      768: {
+        // Puedes mostrar 1.2 slides en pantallas grandes
+        slidesPerView: 1.2,
+      }
+    }
+  });
+  
+  const swiperMobile = new Swiper('.carousel-mobile', {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 20,
+    centeredSlides: true,
+    centeredSlidesBounds: true, // ayuda a no dejar espacio en blanco
+    watchOverflow: true,        // desactiva el loop si hay pocas slides
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      576: {
+        slidesPerView: 'auto',
+        centeredSlides: true
+      }
+    }
+  });
+
+  // Control de dispositivos
+  document.querySelectorAll('.btn-device').forEach(button => {
+    button.addEventListener('click', function() {
+      const device = this.dataset.device;
+      document.querySelectorAll('.btn-device').forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+      
+      if(device === 'web') {
+        document.querySelector('.carousel-web').style.display = 'block';
+        document.querySelector('.carousel-mobile').style.display = 'none';
+        swiperWeb.update();
+      } else {
+        document.querySelector('.carousel-web').style.display = 'none';
+        document.querySelector('.carousel-mobile').style.display = 'block';
+        swiperMobile.update();
+      }
+    });
+  });
+
+  // Control de temas
+  document.querySelectorAll('.btn-theme').forEach(button => {
+    button.addEventListener('click', function() {
+      const theme = this.dataset.theme;
+      document.querySelectorAll('.btn-theme').forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+      
+      document.querySelectorAll('.swiper').forEach(swiper => {
+        swiper.classList.remove('theme-light', 'theme-dark');
+        swiper.classList.add(`theme-${theme}`);
+      });
+    });
+  });
+});

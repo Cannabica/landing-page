@@ -1967,3 +1967,69 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+
+.swiper {
+  width: 100%;
+  padding: 40px 0;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* Elimina estas reglas para que Swiper calcule los anchos
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+  */
+}
+
+.carousel-mobile .swiper-slide {
+  max-width: 300px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  /* Agregamos un borde sutil */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* Intensificamos ligeramente la sombra base */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.swiper-slide img:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+.theme-light .theme-light,
+.theme-dark .theme-dark {
+  display: block !important;
+}
+
+.theme-light .theme-dark,
+.theme-dark .theme-light {
+  display: none !important;
+}
+
+.carousel-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn-group .btn {
+  border-radius: 30px !important;
+  margin: 0 5px;
+}
+
+.btn.active {
+  background: #007bff;
+  color: white !important;
+}
+
