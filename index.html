@@ -1,398 +1,290 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Cannabica - Seguimiento de cultivos indoor</title>
-  <meta name="description" content="Plataforma open source para el seguimiento de cultivos en indoor">
-  <meta name="keywords" content="indoor, cannabica, cannabis, 420, growing, growshop">
-
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cannabica — Plataforma open source para cultivadores</title>
+  <meta name="description" content="Plataforma open source para el seguimiento y la planificación de cultivos indoor. Registrá cada cuidado y seguí tu bitácora, de la germinación a la cosecha.">
+  <meta name="keywords" content="indoor, cultivo, cannabis, cannabica, registro, bitácora, open source">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
   <link rel="manifest" href="assets/img/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #5E9CE6; --secondary: #4DA3FF; --tertiary: #4CD964; --accent: #7B78F5;
+    --bg: #020205; --surface: #08080C; --text: #BCBFC2; --heading: #F0F0F0; --muted: #6B7280;
+    --border: rgba(255,255,255,0.06); --glassy-bg: rgba(8,8,12,0.72); --glassy-border: rgba(255,255,255,0.06);
+    --space-sm: 8px; --space-md: 16px; --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px;
+    --content-max: 1100px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px;
+    --font-sans: Inter, system-ui, sans-serif; --font-mono: 'JetBrains Mono', monospace;
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4); --shadow-lg: 0 8px 30px rgba(0,0,0,0.5);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: radial-gradient(800px 400px at 15% -5%, rgba(37,99,235,0.16), transparent 60%), radial-gradient(600px 300px at 90% 10%, rgba(77,163,255,0.10), transparent 55%), var(--bg); }
+  a { color: var(--secondary); text-decoration: none; }
+  h1, h2, h3 { color: var(--heading); letter-spacing: -0.02em; line-height: 1.15; }
+  .container { max-width: var(--content-max); margin: 0 auto; padding: 0 var(--space-lg); }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--heading); }
+  .brand-mark { flex: 0 0 auto; border-radius: 6px; }
+  .brand-word { font-weight: 700; letter-spacing: -0.05em; font-size: 18px; color: var(--heading); white-space: nowrap; }
+  .brand-lambda { color: var(--secondary); }
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(180%) blur(14px); border-bottom: 1px solid var(--border); }
+  .nav-row { display: flex; align-items: center; gap: var(--space-xl); height: 64px; }
+  .nav-links { display: flex; gap: 22px; margin-left: auto; font-size: 14.5px; }
+  .nav-links a { color: var(--muted); }
+  .nav-links a:hover { color: var(--heading); }
+  .nav-rrss { display: flex; gap: 12px; }
+  .nav-rrss a { color: var(--muted); display: inline-flex; }
+  .nav-rrss svg { width: 17px; height: 17px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: var(--radius-md); font-weight: 600; font-size: 14.5px; border: 1px solid transparent; cursor: pointer; transition: opacity .15s ease, transform .15s ease; }
+  .btn:hover { opacity: .9; }
+  .btn-primary { background: linear-gradient(135deg, var(--secondary), var(--primary)); color: #fff; box-shadow: var(--shadow-md); }
+  .btn-ghost { background: transparent; color: var(--heading); border-color: var(--border); }
+  .btn-ghost:hover { background: var(--surface); }
+  .btn-lg { padding: 13px 26px; font-size: 15.5px; border-radius: var(--radius-lg); }
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  /* Hero */
+  .hero { padding: 96px 0 80px; text-align: center; }
+  .hero-img { width: clamp(140px, 18vw, 190px); height: clamp(140px, 18vw, 190px); border-radius: 30px; box-shadow: var(--shadow-lg); margin-bottom: var(--space-lg); }
+  .hero h1 { font-size: clamp(30px, 4.4vw, 46px); max-width: 16ch; margin: 0 auto var(--space-md); }
+  .hero h1 em { font-style: normal; background: linear-gradient(120deg, var(--secondary), var(--primary)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .lede { max-width: 58ch; margin: 0 auto var(--space-xl); color: var(--muted); font-size: 18px; }
+  .hero-actions { display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; }
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  /* Section base */
+  .section { padding: 88px 0; }
+  .section-title { text-align: center; margin-bottom: var(--space-3xl); }
+  .section-title h2 { font-size: clamp(26px, 3.4vw, 36px); margin-bottom: var(--space-sm); }
+  .section-title p { color: var(--muted); max-width: 62ch; margin: 0 auto; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--primary); margin-bottom: var(--space-md); }
+  .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); }
 
+  /* Cards / glass */
+  .card { background: var(--glassy-bg); border: 1px solid var(--glassy-border); backdrop-filter: blur(20px); border-radius: var(--radius-lg); padding: var(--space-lg); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+  @media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .nav-links { display: none; } }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-2xl); align-items: center; }
+  @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
+  .about h3 { font-size: clamp(22px, 2.6vw, 30px); margin: var(--space-sm) 0 var(--space-md); }
+  .about p.lead { color: var(--text); font-size: 16.5px; }
+  .about p.muted-note { color: var(--muted); font-size: 15px; margin-top: var(--space-md); }
+  .leaf-deco { display: flex; justify-content: center; padding: var(--space-xl); }
+  .leaf-deco svg { width: 250px; height: 250px; color: var(--primary); opacity: .9; }
+
+  /* Features */
+  .feature { background: var(--glassy-bg); border: 1px solid var(--glassy-border); backdrop-filter: blur(20px); border-radius: var(--radius-lg); padding: var(--space-lg) var(--space-lg); display: flex; gap: var(--space-md); align-items: flex-start; }
+  .feature svg { flex: 0 0 auto; width: 34px; height: 34px; color: var(--primary); margin-top: 2px; }
+  .feature h3 { font-size: 17.5px; margin-bottom: 4px; }
+  .feature p { font-size: 14.5px; color: var(--muted); }
+
+  /* Community */
+  .community { background: linear-gradient(180deg, transparent, rgba(37,99,235,0.06) 30%, rgba(37,99,235,0.12) 70%, transparent); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .community .inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-md); }
+  .community h2 { font-size: clamp(24px, 3vw, 34px); }
+  .community p { color: var(--muted); max-width: 52ch; }
+
+  /* CTA */
+  .cta { margin: 0 0 72px; background: linear-gradient(135deg, var(--secondary), var(--primary)); border-radius: 24px; padding: 56px 48px; display: grid; grid-template-columns: 1.4fr auto; gap: var(--space-xl); align-items: center; }
+  @media (max-width: 760px) { .cta { grid-template-columns: 1fr; padding: 36px; } }
+  .cta h2 { color: #fff; font-size: clamp(24px, 3vw, 34px); margin-bottom: 8px; }
+  .cta p { color: rgba(255,255,255,.92); margin-bottom: 0; }
+  .cta .btn { background: #fff; color: var(--primary); }
+  .cta .btn-ghost-light { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.4); }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 36px 0 56px; color: var(--muted); font-size: 13.5px; text-align: center; }
+  .footer-rrss { display: flex; justify-content: center; gap: 16px; margin-bottom: 18px; }
+  .footer-rrss a { color: var(--muted); }
+  .footer-rrss svg { width: 18px; height: 18px; }
+  .footer-rrss a:hover { color: var(--heading); }
+  .footer-bottom strong { color: var(--heading); }
+</style>
 </head>
+<body>
 
-<body class="index-page">
-
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
-
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/isologo-blue.png" alt="">
-        <h1 class="sitename">Cannabica</h1>
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html#hero" class="active">Inicio</a></li>
-          <li><a href="index.html#about">Proyecto</a></li>
-          <li><a href="index.html#community">Comunidad</a></li>
-          <li><a href="index.html#funciones">Funciones</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+  <header class="nav">
+    <div class="container nav-row">
+      <a class="brand" href="#top"><img src="assets/img/isologo-bold-white.png" alt="Cannabica" style="width:26px;height:26px;border-radius:6px"><span class="brand-word">CANN<span class="brand-lambda">Λ</span>BICA</span></a>
+      <nav class="nav-links">
+        <a href="#about">Proyecto</a>
+        <a href="#community">Comunidad</a>
+        <a href="#funciones">Funciones</a>
       </nav>
-
-      <a class="btn-getstarted" href="index.html#whishlist">Registrate</a>
-      <a class="nav-link-rrss" href="https://x.com/Cannabicaapp"><i class="bi bi-twitter"></i></a>
-      <a class="nav-link-rrss" href="https://www.instagram.com/cann4bic4.app/"><i class="bi bi-instagram"></i></a>
+      <div class="nav-rrss">
+        <a href="https://x.com/Cannabicaapp" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.2 2h6.4l4.4 5.9L18.9 2Zm-1.1 18h1.7L7.6 3.7H5.7L17.8 20Z"></path></svg></a>
+        <a href="https://www.instagram.com/cann4bic4.app/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.8.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.3-.3.8-.3 1.8-.1 1.3-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.8.2.5.4.8.7 1.1.3.3.6.5 1.1.7.3.1.8.3 1.8.3 1.3.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.8-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.3.3-.8.3-1.8.1-1.3.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.8-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.3-.1-.8-.3-1.8-.3-1.3-.1-1.6-.1-4.8-.1Zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.2-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"></path></svg></a>
+      </div>
+      <a class="btn btn-primary" href="https://plataforma.cannabica.ar/tenant/register" style="padding:8px 16px;font-size:13.5px">Registrate</a>
     </div>
   </header>
 
-  <main class="main">
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero section">
-      <div class="container text-center">
-        <div class="d-flex flex-column justify-content-center align-items-center">
-          <img src="assets/img/logo.png" class="hero-img mb-3" alt="" data-aos="zoom-out" data-aos-delay="300">
-          <!-- <h1 data-aos="fade-up"><span>Cannabica</span></h1> -->
-          <p data-aos="fade-up" data-aos-delay="100">Plataforma open source para el seguimiento y planificación de
-            cultivos indoor.<br></p>
-          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="#whishlist" class="btn-get-started mx-3">Registrate</a>
-            <a href="#" class="btn-ingresa-plataforma-outline disabled">Ingresar a la plataforma</a>
-          </div>
-        </div>
-      </div>
-
-    </section><!-- /Hero Section -->
-
-    <section id="screenshots" class="screenshots secondary-background section p-3">
-
-      <div class="container my-3">
-        <div class="section-title my-3" data-aos="fade-up">
-          <h2>Capturas</h2>
-          <p>Explora la plataforma en sus diferentes versiones y temas</p>
-        </div>
-        <!-- Contenedor de controles -->
-        <div class="carousel-controls text-center">
-
-          <!-- Switch para elegir entre Web / Móvil -->
-          <div class="form-check form-switch">
-
-            <input class="form-check-input" type="checkbox" role="switch" id="deviceSwitch">
-            <label class="form-check-label" for="deviceSwitch">
-              Vista de celular
-            </label>
-          </div>
-
-          <!-- Switch para elegir entre Claro / Oscuro -->
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="themeSwitch">
-            <label class="form-check-label" for="themeSwitch">
-              Tema oscuro
-            </label>
-          </div>
-
-        </div>
-
-        <!-- Web Carousel -->
-        <div class="swiper carousel-web">
-          <div class="swiper-wrapper">
-            <!-- Web Slides (7 items) -->
-            <div class="swiper-slide">
-              <img src="assets/img/web/light1.png" class="theme-light img-fluid">
-              <img src="assets/img/web/dark1.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/img/web/light2.png" class="theme-light img-fluid">
-              <img src="assets/img/web/dark2.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/img/web/light3.png" class="theme-light img-fluid">
-              <img src="assets/img/web/dark3.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/img/web/light4.png" class="theme-light img-fluid">
-              <img src="assets/img/web/dark4.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/img/web/light5.png" class="theme-light img-fluid">
-              <img src="assets/img/web/dark5.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/img/web/light6.png" class="theme-light img-fluid">
-              <img src="assets/img/web/dark6.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/img/web/light7.png" class="theme-light img-fluid">
-              <img src="assets/img/web/dark7.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
-
-        <!-- Mobile Carousel -->
-        <div class="swiper carousel-mobile" style="display: none;">
-          <div class="swiper-wrapper">
-            <!-- Mobile Slides (6 items) -->
-            <div class="swiper-slide">
-              <img src="assets/img/mobile/light1.png" class="theme-light img-fluid">
-              <img src="assets/img/mobile/dark1.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/img/mobile/light2.png" class="theme-light img-fluid">
-              <img src="assets/img/mobile/dark2.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/img/mobile/light3.png" class="theme-light img-fluid">
-              <img src="assets/img/mobile/dark3.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/img/mobile/light4.png" class="theme-light img-fluid">
-              <img src="assets/img/mobile/dark4.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/img/mobile/light5.png" class="theme-light img-fluid">
-              <img src="assets/img/mobile/dark5.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/img/mobile/light6.png" class="theme-light img-fluid">
-              <img src="assets/img/mobile/dark6.png" class="theme-dark img-fluid" style="display: none;">
-            </div>
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
-      </div>
-
-    </section><!-- End Screenshots Section -->
-
-    <!-- Modal para mostrar imagen ampliada -->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-          </div>
-          <div class="modal-body text-center">
-            <img id="modalImage" src="" alt="Imagen ampliada" class="img-fluid" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- About Section -->
-    <section id="about" class="about section my-6">
-
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="top">
       <div class="container">
+        <img class="hero-img" src="assets/img/isologo-blue.png" alt="Isologo Cannabica">
+        <h1>La plataforma que te acompaña en tus <em>ciclos de cultivo</em></h1>
+        <p class="lede">Software libre para el seguimiento y la planificación de cultivos indoor: registrá cada cuidado y mirá crecer tu bitácora, de la germinación a la cosecha.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="https://plataforma.cannabica.ar/tenant/register">Crear cuenta gratuita</a>
+          <a class="btn btn-ghost btn-lg" href="https://plataforma.cannabica.ar/tenant/login">Ingresar a la plataforma</a>
+        </div>
+      </div>
+    </section>
 
-        <div class="row gy-4">
-
-          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-            <p class="who-we-are">Acerca del proyecto</p>
+    <!-- About -->
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <span class="eyebrow">Acerca del proyecto</span>
             <h3>Cannabica es una herramienta para ayudarte en tus ciclos de cultivos.</h3>
-            <p class="fst-italic">
-              Creamos una plataforma open source accesible para todos los cultivadores, diseñada para simplificar el
-              seguimiento de cultivos desde la germinación hasta la cosecha. Permite registrar cuidados, generar
-              historiales y optimizar tus ciclos de cultivo.
-              <br>
-              <br>
-              Próximamente, nos gustaría añadir funciones como trazabilidad de cosechas, alertas en tu teléfono,
-              integración con sensores para monitorear parámetros clave y la opción de compartir datos con la comunidad
-              para recibir feedback.
-            </p>
+            <p class="lead">Creamos una plataforma open source accesible para todos los cultivadores, diseñada para simplificar el seguimiento de cultivos desde la germinación hasta la cosecha. Permite registrar cuidados, generar historiales y optimizar tus ciclos de cultivo.</p>
+            <p class="muted-note">Ya tenemos un bot de Telegram en funcionamiento. Las próximas funciones se van a definir en un roadmap y buscamos el feedback de la comunidad para decidir las futuras actualizaciones.</p>
           </div>
-
-          <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
-            <div class="row gy-4">
-              <div class="col-lg-6">
-                <img src="assets/img/about01.png" class="img-fluid" alt="">
-              </div>
-              <div class="col-lg-6">
-                <div class="col-lg-12">
-                  <img src="assets/img/about02.png" class="img-fluid" alt="">
-                </div>
-              </div>
-            </div>
-
+          <div class="leaf-deco">
+            <!-- Ciclo cerrado de 4 etapas: semilla → plántula → vegetativa → floración -->
+            <svg viewBox="0 0 316 316" fill="currentColor" aria-hidden="true">
+            <!-- Órbita del ciclo -->
+            <circle cx="158" cy="158" r="96" fill="none" stroke="currentColor" stroke-width="2.2" stroke-dasharray="1 9" stroke-linecap="round" opacity="0.45"></circle>
+            <!-- 1 · Semilla (suroeste) -->
+            <path d="M90 200 L100 209 L100 228 L90 243 L80 228 L80 209 Z"></path>
+            <path d="M88.9 242 L91.1 242 L90.35 250 L89.65 250 Z"></path>
+            <!-- 2 · Plántula (noroeste) -->
+            <g transform="translate(5,-151)">
+              <path d="M66 252 L102 252 L94 270 L74 270 Z"></path>
+              <path d="M82.8 252 L85.2 252 L85.2 233 L82.8 233 Z"></path>
+              <path d="M82.0 234.1 L79.0 234.6 L77.1 233.4 L75.2 232.1 L73.4 230.9 L71.6 229.5 L73.9 229.9 L75.9 230.4 L78.2 231.0 L80.4 231.6 L82.0 234.1 Z"></path>
+              <path d="M82.6 232.9 L79.3 231.5 L78.1 229.1 L77.0 226.6 L76.0 224.3 L75.1 221.7 L77.1 223.6 L78.8 225.4 L80.7 227.3 L82.5 229.3 L82.6 232.9 Z"></path>
+              <path d="M83.9 232.8 L82.2 230.4 L82.4 228.1 L82.7 225.8 L83.0 223.7 L83.5 221.4 L84.2 223.7 L84.6 225.7 L85.1 228.0 L85.5 230.3 L83.9 232.8 Z"></path>
+              <path d="M84.1 232.8 L82.5 230.3 L82.9 228.0 L83.4 225.7 L83.8 223.7 L84.5 221.4 L85.0 223.7 L85.3 225.8 L85.6 228.1 L85.8 230.4 L84.1 232.8 Z"></path>
+              <path d="M85.4 232.9 L85.5 229.3 L87.3 227.3 L89.2 225.4 L90.9 223.6 L92.9 221.7 L92.0 224.3 L91.0 226.6 L89.9 229.1 L88.7 231.5 L85.4 232.9 Z"></path>
+              <path d="M86.0 234.1 L87.6 231.6 L89.8 231.0 L92.1 230.4 L94.1 229.9 L96.4 229.5 L94.6 230.9 L92.8 232.1 L90.9 233.4 L89.0 234.6 L86.0 234.1 Z"></path>
+            </g>
+            <!-- 3 · Vegetativa (noreste) -->
+            <g transform="translate(67,-37)">
+              <path d="M139 166 L181 166 L178 162 L142 162 Z"></path>
+              <path d="M156 162 L160 162 L159.5 88 L156.5 88 Z"></path>
+              <path d="M156.7 149.3 L154.1 150.0 L152.4 149.0 L150.6 148.0 L149.0 147.1 L147.3 145.9 L149.4 146.2 L151.2 146.5 L153.2 146.8 L155.1 147.2 L156.7 149.3 Z"></path>
+              <path d="M157.1 148.3 L154.1 147.4 L152.8 145.4 L151.6 143.3 L150.6 141.4 L149.5 139.3 L151.5 140.7 L153.1 142.1 L154.9 143.6 L156.7 145.2 L157.1 148.3 Z"></path>
+              <path d="M158.2 148.1 L156.3 146.2 L156.3 144.2 L156.3 142.2 L156.3 140.3 L156.4 138.3 L157.3 140.2 L157.9 141.9 L158.6 143.8 L159.2 145.7 L158.2 148.1 Z"></path>
+              <path d="M158.8 148.1 L157.8 145.7 L158.4 143.8 L159.1 141.9 L159.7 140.2 L160.6 138.3 L160.7 140.3 L160.7 142.2 L160.7 144.2 L160.7 146.2 L158.8 148.1 Z"></path>
+              <path d="M159.9 148.3 L160.3 145.2 L162.1 143.6 L163.9 142.1 L165.5 140.7 L167.5 139.3 L166.4 141.4 L165.4 143.3 L164.2 145.4 L162.9 147.4 L159.9 148.3 Z"></path>
+              <path d="M160.3 149.3 L161.9 147.2 L163.8 146.8 L165.8 146.5 L167.6 146.2 L169.7 145.9 L168.0 147.1 L166.4 148.0 L164.6 149.0 L162.9 150.0 L160.3 149.3 Z"></path>
+              <path d="M156.3 126.4 L154.1 128.5 L151.8 128.5 L149.5 128.5 L147.4 128.5 L145.0 128.4 L147.2 127.4 L149.2 126.7 L151.4 125.9 L153.6 125.2 L156.3 126.4 Z"></path>
+              <path d="M155.8 125.5 L152.2 127.0 L149.4 126.0 L146.6 124.9 L144.1 123.9 L141.3 122.7 L144.4 122.5 L147.0 122.5 L150.0 122.6 L153.0 122.7 L155.8 125.5 Z"></path>
+              <path d="M155.9 124.4 L151.7 124.5 L149.3 122.4 L146.8 120.3 L144.7 118.3 L142.4 115.9 L145.5 117.0 L148.2 118.0 L151.2 119.3 L154.2 120.5 L155.9 124.4 Z"></path>
+              <path d="M156.8 123.8 L153.2 122.5 L151.8 119.9 L150.4 117.2 L149.2 114.8 L148.0 112.0 L150.3 113.9 L152.3 115.8 L154.5 117.8 L156.6 119.9 L156.8 123.8 Z"></path>
+              <path d="M157.9 123.9 L155.6 121.9 L155.3 119.6 L155.0 117.3 L154.8 115.2 L154.7 112.8 L155.9 114.9 L156.8 116.8 L157.8 118.9 L158.8 121.0 L157.9 123.9 Z"></path>
+              <path d="M159.1 123.9 L158.2 121.0 L159.2 118.9 L160.2 116.8 L161.1 114.9 L162.3 112.8 L162.2 115.2 L162.0 117.3 L161.7 119.6 L161.4 121.9 L159.1 123.9 Z"></path>
+              <path d="M160.2 123.8 L160.4 119.9 L162.5 117.8 L164.7 115.8 L166.7 113.9 L169.0 112.0 L167.8 114.8 L166.6 117.2 L165.2 119.9 L163.8 122.5 L160.2 123.8 Z"></path>
+              <path d="M161.1 124.4 L162.8 120.5 L165.8 119.3 L168.8 118.0 L171.5 117.0 L174.6 115.9 L172.3 118.3 L170.2 120.3 L167.7 122.4 L165.3 124.5 L161.1 124.4 Z"></path>
+              <path d="M161.2 125.5 L164.0 122.7 L167.0 122.6 L170.0 122.5 L172.6 122.5 L175.7 122.7 L172.9 123.9 L170.4 124.9 L167.6 126.0 L164.8 127.0 L161.2 125.5 Z"></path>
+              <path d="M160.7 126.4 L163.4 125.2 L165.6 125.9 L167.8 126.7 L169.8 127.4 L172.0 128.4 L169.6 128.5 L167.5 128.5 L165.2 128.5 L162.9 128.5 L160.7 126.4 Z"></path>
+              <path d="M155.7 94.0 L150.9 93.9 L148.2 91.4 L145.6 88.8 L143.3 86.4 L140.8 83.6 L144.3 85.0 L147.3 86.3 L150.6 87.9 L153.9 89.6 L155.7 94.0 Z"></path>
+              <path d="M156.5 92.1 L151.1 89.1 L149.6 84.7 L148.1 80.2 L146.9 76.2 L145.8 71.5 L148.9 75.1 L151.5 78.5 L154.3 82.2 L157.1 86.0 L156.5 92.1 Z"></path>
+              <path d="M158.5 91.2 L154.8 85.7 L155.6 80.6 L156.4 75.6 L157.3 71.0 L158.5 66.0 L159.7 71.0 L160.6 75.6 L161.4 80.6 L162.2 85.7 L158.5 91.2 Z"></path>
+              <path d="M160.5 92.1 L159.9 86.0 L162.7 82.2 L165.5 78.5 L168.1 75.1 L171.2 71.5 L170.1 76.2 L168.9 80.2 L167.4 84.7 L165.9 89.1 L160.5 92.1 Z"></path>
+              <path d="M161.3 94.0 L163.1 89.6 L166.4 87.9 L169.7 86.3 L172.7 85.0 L176.2 83.6 L173.7 86.4 L171.4 88.8 L168.8 91.4 L166.1 93.9 L161.3 94.0 Z"></path>
+            </g>
+            <!-- 4 · Floración (sureste) -->
+            <g transform="translate(-6,150)">
+              <path d="M208 122 L256 122 L253 118 L211 118 Z"></path>
+              <path d="M230.5 118 L233.5 118 L233 58 L231 58 Z"></path>
+              <path d="M229.6 95.4 L226.4 96.5 L224.0 95.5 L221.6 94.5 L219.5 93.5 L217.2 92.3 L219.8 92.3 L222.1 92.5 L224.7 92.7 L227.3 92.9 L229.6 95.4 Z"></path>
+              <path d="M230.1 93.9 L226.2 92.9 L224.5 90.3 L222.9 87.7 L221.4 85.4 L220.0 82.6 L222.5 84.4 L224.7 86.1 L227.1 88.0 L229.5 89.9 L230.1 93.9 Z"></path>
+              <path d="M231.7 93.6 L229.4 91.0 L229.4 88.4 L229.5 85.8 L229.6 83.5 L229.9 80.8 L230.9 83.3 L231.6 85.5 L232.4 88.0 L233.1 90.5 L231.7 93.6 Z"></path>
+              <path d="M232.3 93.6 L230.9 90.5 L231.6 88.0 L232.4 85.5 L233.1 83.3 L234.1 80.8 L234.4 83.5 L234.5 85.8 L234.6 88.4 L234.6 91.0 L232.3 93.6 Z"></path>
+              <path d="M233.9 93.9 L234.5 89.9 L236.9 88.0 L239.3 86.1 L241.5 84.4 L244.0 82.6 L242.6 85.4 L241.1 87.7 L239.5 90.3 L237.8 92.9 L233.9 93.9 Z"></path>
+              <path d="M234.4 95.4 L236.7 92.9 L239.3 92.7 L241.9 92.5 L244.2 92.3 L246.8 92.3 L244.5 93.5 L242.4 94.5 L240.0 95.5 L237.6 96.5 L234.4 95.4 Z"></path>
+              <path d="M232 30 L246 48 L232 60 L218 48 Z"></path>
+            </g>
+          </svg>
           </div>
-
         </div>
-
       </div>
-    </section><!-- /About Section -->
+    </section>
 
-    </section><!-- /Features Details Section -->
-
-    <!-- community Section -->
-    <section id="community" class="community section secondary-background p-3">
-
-      <!-- Section Title -->
-      <div class="container section-title d-flex flex-column my-3" data-aos="fade-up">
+    <!-- Community -->
+    <section class="section community" id="community">
+      <div class="container inner">
+        <span class="eyebrow">Comunidad</span>
         <h2>Unite a nuestra comunidad</h2>
-        <p>Estamos formando una comunidad activa en nuestro servidor de Discord. Comparte tus experiencias y aprende de
-          otros cultivadores.</p>
-        <div class="container">
-          <a href="https://discord.gg/jN9Tje3eJe" class="btn-get-started m-3"><i class="bi bi-discord"></i> Sumate a
-            discord</a>
-        </div>
-      </div><!-- End Section Title -->
-
-    </section><!-- /Pricing Section -->
-
-    <!-- funciones Section -->
-    <section id="funciones" class="services section my-3 pt-5 bkg-grey">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Funciones</h2>
-        <p>Pensamos una serie de cuidados a registrar sobre las plantas para tener un registro completo de la vida de
-          tus plantas durante el ciclo de cultivo</p>
-        <br>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row g-5">
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item item-cyan position-relative">
-              <i class="bi bi-moisture icon"></i>
-              <div>
-                <h3>Registro de riegos</h3>
-                <p>Sea de manera manual o automática, podrás llevar un registro de los riegos realizados a tus plantas.
-                </p>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item item-orange position-relative">
-              <i class="bi bi-scissors icon"></i>
-              <div>
-                <h3>Registro de podas</h3>
-                <p>Podas apicales, podas de ramas, podas de hojas, todas las podas que realices a tus plantas podrás
-                  registrarlas.</p>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item item-teal position-relative">
-              <i class="bi bi-eyedropper icon"></i>
-              <div>
-                <h3>Registrar aplicaciones</h3>
-                <p>Lleva un registro de los productos que aplicas a tus plantas, ya sean fertilizantes, insecticidas,
-                  fungicidas, etc.</p>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item item-red position-relative">
-              <i class="bi bi-trash2 icon"></i>
-              <div>
-                <h3>Registrar transplantes</h3>
-                <p>Selecciona el tipo de maceta sea de plastico o geotextiles y la capacidad en litros.</p>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item item-indigo position-relative">
-              <i class="bi bi-camera icon"></i>
-              <div>
-                <h3>Seguimiento en imagenes</h3>
-                <p>Registra en imagenes cualquier momento con sus detalles para tener una mirada completa en el tiempo
-                  sobre la vida de tus plantas.</p>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item item-pink position-relative">
-              <i class="bi bi-stoplights icon"></i>
-              <div>
-                <h3>Cambio de etapas</h3>
-                <p>Establece en que estapa se encuentra tu planta de germinación, vegetativa o floración</p>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-        </div>
-
+        <p>Estamos formando una comunidad activa en nuestro servidor de Discord. Compartí tus experiencias y aprendé de otros cultivadores.</p>
+        <a class="btn btn-ghost btn-lg" href="https://discord.gg/jN9Tje3eJe">Sumate a Discord</a>
       </div>
+    </section>
 
-    </section><!-- /Services Section -->
-
-    <!-- whishlist Section -->
-    <section id="whishlist" class="whishlist section mt-5 secondary-background">
-
-      <!-- Section Title -->
-      <div class="container page-title d-flex justify-content-around" data-aos="fade-up">
-        <div>
-          <h1 class="whishlist-text"">Únete a la lista de espera para el acceso anticipado</h1>
+    <!-- Funciones -->
+    <section class="section" id="funciones">
+      <div class="container">
+        <div class="section-title">
+          <span class="eyebrow">Funciones</span>
+          <h2>Qué vas a registrar</h2>
+          <p>Pensamos una serie de cuidados a registrar sobre las plantas para tener un registro completo de la vida de tus plantas durante el ciclo de cultivo.</p>
         </div>
-        <a href="
-            https://docs.google.com/forms/d/e/1FAIpQLSfVCO4PoZC3v_K8cfhUZYs-itas-8CDdNrKhbl29yoVOlsj5w/viewform?usp=sharing"
-            class="btn-lg btn-get-started m-3"><i class="bi bi-pen-fill"></i> Registrate al acceso anticipado</a>
-        </div><!-- End Section Title -->
+        <div class="grid-2">
+          <div class="feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 5.5 6 11a6 6 0 0 1-12 0c0-5.5 6-11 6-11Z"></path><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"></path></svg>
+            <div><h3>Registro de riegos</h3><p>Sea de manera manual o automática, vas a poder llevar un registro de los riegos realizados a tus plantas.</p></div>
+          </div>
+          <div class="feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><path d="M8.12 8.12 12 12"></path><path d="M20 4 8.12 15.88"></path><circle cx="6" cy="18" r="3"></circle><path d="M14.8 14.8 20 20"></path></svg>
+            <div><h3>Registro de podas</h3><p>Podas apicales, podas de ramas, podas de hojas: todas las podas que realices a tus plantas vas a poder registrarlas.</p></div>
+          </div>
+          <div class="feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"></path><path d="M2 6h4"></path><path d="M2 10h4"></path><path d="M2 14h4"></path><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"></path></svg>
+            <div><h3>Registrar aplicaciones</h3><p>Llevá un registro de los productos que aplicás a tus plantas: fertilizantes, insecticidas, fungicidas, etc.</p></div>
+          </div>
+          <div class="feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11h14"></path><path d="M6.8 11 8.6 21h6.8l1.8-10"></path><path d="M12 11v-3.4"></path><path d="M12 8.6c-1.5-.4-2.7-1.3-3.3-3 1.6.4 2.7 1.2 3.3 3Z"></path><path d="M12 7.6c1.5-.5 2.7-1.3 3.3-2.7-1.6.5-2.7 1.4-3.3 2.7Z"></path></svg>
+            <div><h3>Registrar transplantes</h3><p>Seleccioná el tipo de maceta — plástico o geotextil — y la capacidad en litros.</p></div>
+          </div>
+          <div class="feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+            <div><h3>Seguimiento en imágenes</h3><p>Registrá en imágenes cualquier momento con sus detalles para tener una mirada completa en el tiempo sobre la vida de tus plantas.</p></div>
+          </div>
+          <div class="feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"></circle><circle cx="12" cy="17" r="3.4"></circle><circle cx="19" cy="8" r="2.4"></circle><path d="M8.2 7.5 9.5 13.6"></path><path d="M15.8 7.5 14.6 13.2"></path></svg>
+            <div><h3>Cambio de etapas</h3><p>Establecé en qué etapa se encuentra tu planta: germinación, vegetativa o floración.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    </section><!-- -->
+    <!-- CTA -->
+    <section>
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2>Empezá hoy a registrar tus cultivos</h2>
+            <p>Registro abierto — creá tu cuenta gratuita y empezá tu bitácora.</p>
+          </div>
+          <a class="btn btn-lg" href="https://plataforma.cannabica.ar/tenant/register">Crear cuenta gratuita</a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer id="footer" class="footer pt-5">
-
-    <div class="container text-center footer-top">
-      <div class="row">
-        <div class="col ">
-          <div class="social-links justify-content-center  d-flex">
-            <a href="https://x.com/Cannabicaapp"><i class="bi bi-twitter"></i></a>
-            <a href="https://www.instagram.com/cann4bic4.app/"><i class="bi bi-instagram"></i></a>
-          </div>
-        </div>
+  <footer>
+    <div class="container">
+      <div class="footer-rrss">
+        <a href="https://x.com/Cannabicaapp" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.2 2h6.4l4.4 5.9L18.9 2Zm-1.1 18h1.7L7.6 3.7H5.7L17.8 20Z"></path></svg></a>
+        <a href="https://www.instagram.com/cann4bic4.app/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.8.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.3-.3.8-.3 1.8-.1 1.3-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.8.2.5.4.8.7 1.1.3.3.6.5 1.1.7.3.1.8.3 1.8.3 1.3.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.8-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.3.3-.8.3-1.8.1-1.3.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.8-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.3-.1-.8-.3-1.8-.3-1.3-.1-1.6-.1-4.8-.1Zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.2-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"></path></svg></a>
       </div>
+      <p class="footer-bottom">© <span>Copyright</span> <strong>Cannabica</strong> — Todos los derechos reservados</p>
     </div>
-
-    <div class="container copyright text-center">
-
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Cannabica</strong><span>All Rights Reserved</span></p>
-    </div>
-
   </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-</body>
-
-</html>
+</body></html>
