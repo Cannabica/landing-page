@@ -1,23 +1,24 @@
 <!doctype html>
-<html lang="es"><head>
+<html lang="es-AR"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cannabica — Bitácora de cultivo indoor</title>
-  <meta name="description" content="Llevá la bitácora de tu cultivo indoor: registrá riegos, podas, transplantes y aplicaciones, y seguí cada planta de la germinación a la cosecha. Creá tu cuenta gratis.">
-  <meta name="keywords" content="bitácora de cultivo, cultivo indoor, seguimiento de plantas, registro de riegos, cannabica">
+<title>Cannabica — Registro de cultivo indoor</title>
+  <meta name="description" content="Llevá el registro de tu cultivo indoor: anotá riegos, podas, trasplantes y aplicaciones, y seguí cada planta de la germinación a la cosecha. Creá tu cuenta gratis.">
+  <meta name="keywords" content="registro de cultivo, cultivo indoor, seguimiento de plantas, riegos y podas">
+  <link rel="canonical" href="https://cannabica.ar/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Cannabica">
   <meta property="og:locale" content="es_AR">
   <meta property="og:url" content="https://cannabica.ar/">
-  <meta property="og:title" content="Cannabica — Bitácora de cultivo indoor">
-  <meta property="og:description" content="Registrá riegos, podas, transplantes y aplicaciones, y seguí cada planta de la germinación a la cosecha.">
+  <meta property="og:title" content="Cannabica — Registro de cultivo indoor">
+  <meta property="og:description" content="Anotá riegos, podas, trasplantes y aplicaciones, y seguí cada planta de la germinación a la cosecha.">
   <meta property="og:image" content="https://cannabica.ar/assets/img/og-cannabica.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Cannabica — Bitácora de cultivo indoor">
+  <meta property="og:image:alt" content="Cannabica — Registro de cultivo indoor">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Cannabica — Bitácora de cultivo indoor">
-  <meta name="twitter:description" content="Registrá riegos, podas, transplantes y aplicaciones, y seguí cada planta de la germinación a la cosecha.">
+  <meta name="twitter:title" content="Cannabica — Registro de cultivo indoor">
+  <meta name="twitter:description" content="Anotá riegos, podas, trasplantes y aplicaciones, y seguí cada planta de la germinación a la cosecha.">
   <meta name="twitter:image" content="https://cannabica.ar/assets/img/og-cannabica.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
@@ -88,7 +89,7 @@
   /* About */
   .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-2xl); align-items: center; }
   @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
-  .about h3 { font-size: clamp(22px, 2.6vw, 30px); margin: var(--space-sm) 0 var(--space-md); }
+  .about h2 { font-size: clamp(22px, 2.6vw, 30px); margin: var(--space-sm) 0 var(--space-md); }
   .about p.lead { color: var(--text); font-size: 16.5px; }
   .about p.muted-note { color: var(--muted); font-size: 15px; margin-top: var(--space-md); }
   .leaf-deco { display: flex; justify-content: center; padding: var(--space-xl); }
@@ -147,7 +148,7 @@
       <div class="container">
         <img class="hero-img" src="assets/img/isologo-blue.png" alt="Isologo Cannabica">
         <h1>La plataforma que te acompaña en tus <em>ciclos de cultivo</em></h1>
-        <p class="lede">La bitácora de tu cultivo indoor: registrá cada cuidado y mirá crecer tu historial, de la germinación a la cosecha.</p>
+        <p class="lede">El registro de tu cultivo indoor: anotá cada cuidado y mirá crecer tu historial, de la germinación a la cosecha.</p>
         <div class="hero-actions">
           <a class="btn btn-primary btn-lg" href="https://plataforma.cannabica.ar/tenant/register">Crear cuenta gratuita</a>
           <a class="btn btn-ghost btn-lg" href="https://plataforma.cannabica.ar/tenant/login">Ingresar a la plataforma</a>
@@ -161,9 +162,9 @@
         <div class="about-grid">
           <div>
             <span class="eyebrow">Acerca del proyecto</span>
-            <h3>Cannabica es una herramienta para ayudarte en tus ciclos de cultivos.</h3>
-            <p class="lead">Construimos Cannabica junto a la comunidad de cultivadores, para simplificar el seguimiento del cultivo desde la germinación hasta la cosecha: registrá cada cuidado y armá el historial de tus plantas.</p>
-            <p class="muted-note">Ya tenemos un bot de Telegram en funcionamiento. Las próximas funciones se van a definir en un roadmap y buscamos el feedback de la comunidad para decidir las futuras actualizaciones.</p>
+            <h2>Cannabica es una herramienta para ayudarte en tus ciclos de cultivos.</h2>
+            <p class="lead">Anotá cada cuidado de tus plantas, de la germinación a la cosecha: un registro ordenado por planta, con fechas y detalles. Es un proyecto en desarrollo activo.</p>
+            <p class="muted-note">Ya tenemos un bot de Telegram en funcionamiento. Las próximas funciones se van a definir en un roadmap y buscamos el feedback de quien la use para decidir las futuras actualizaciones.</p>
           </div>
           <div class="leaf-deco">
             <!-- Ciclo cerrado de 4 etapas: semilla → plántula → vegetativa → floración -->
@@ -261,7 +262,7 @@
           </div>
           <div class="feature">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11h14"></path><path d="M6.8 11 8.6 21h6.8l1.8-10"></path><path d="M12 11v-3.4"></path><path d="M12 8.6c-1.5-.4-2.7-1.3-3.3-3 1.6.4 2.7 1.2 3.3 3Z"></path><path d="M12 7.6c1.5-.5 2.7-1.3 3.3-2.7-1.6.5-2.7 1.4-3.3 2.7Z"></path></svg>
-            <div><h3>Registrar transplantes</h3><p>Seleccioná el tipo de maceta — plástico o geotextil — y la capacidad en litros.</p></div>
+            <div><h3>Registrar trasplantes</h3><p>Seleccioná el tipo de maceta — plástico o geotextil — y la capacidad en litros.</p></div>
           </div>
           <div class="feature">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"></path><circle cx="12" cy="13" r="3"></circle></svg>
@@ -281,7 +282,7 @@
         <div class="cta">
           <div>
             <h2>Empezá hoy a registrar tus cultivos</h2>
-            <p>Registro abierto — creá tu cuenta gratuita y empezá tu bitácora.</p>
+            <p>Registro abierto — creá tu cuenta gratuita y empezá a anotar.</p>
           </div>
           <a class="btn btn-lg" href="https://plataforma.cannabica.ar/tenant/register">Crear cuenta gratuita</a>
         </div>
