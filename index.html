@@ -1,10 +1,25 @@
 <!doctype html>
-<html lang="es"><head>
+<html lang="es-AR"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cannabica — Plataforma open source para cultivadores</title>
-  <meta name="description" content="Plataforma open source para el seguimiento y la planificación de cultivos indoor. Registrá cada cuidado y seguí tu bitácora, de la germinación a la cosecha.">
-  <meta name="keywords" content="indoor, cultivo, cannabis, cannabica, registro, bitácora, open source">
+<title>Cannabica — Registro de cultivo indoor</title>
+  <meta name="description" content="Llevá el registro de tu cultivo indoor: anotá riegos, podas, trasplantes y aplicaciones, y seguí cada planta desde la germinación hasta la cosecha. Creá tu cuenta gratis.">
+  <meta name="keywords" content="registro de cultivo, cultivo indoor, seguimiento de plantas, riegos y podas">
+  <link rel="canonical" href="https://cannabica.ar/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Cannabica">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:url" content="https://cannabica.ar/">
+  <meta property="og:title" content="Cannabica — Registro de cultivo indoor">
+  <meta property="og:description" content="Anotá riegos, podas, trasplantes y aplicaciones, y seguí cada planta desde la germinación hasta la cosecha.">
+  <meta property="og:image" content="https://cannabica.ar/assets/img/og-cannabica.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cannabica — Registro de cultivo indoor">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cannabica — Registro de cultivo indoor">
+  <meta name="twitter:description" content="Anotá riegos, podas, trasplantes y aplicaciones, y seguí cada planta desde la germinación hasta la cosecha.">
+  <meta name="twitter:image" content="https://cannabica.ar/assets/img/og-cannabica.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
@@ -74,7 +89,7 @@
   /* About */
   .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-2xl); align-items: center; }
   @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
-  .about h3 { font-size: clamp(22px, 2.6vw, 30px); margin: var(--space-sm) 0 var(--space-md); }
+  .about h2 { font-size: clamp(22px, 2.6vw, 30px); margin: var(--space-sm) 0 var(--space-md); }
   .about p.lead { color: var(--text); font-size: 16.5px; }
   .about p.muted-note { color: var(--muted); font-size: 15px; margin-top: var(--space-md); }
   .leaf-deco { display: flex; justify-content: center; padding: var(--space-xl); }
@@ -121,7 +136,7 @@
       </nav>
       <div class="nav-rrss">
         <a href="https://x.com/Cannabicaapp" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.2 2h6.4l4.4 5.9L18.9 2Zm-1.1 18h1.7L7.6 3.7H5.7L17.8 20Z"></path></svg></a>
-        <a href="https://www.instagram.com/cann4bic4.app/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.8.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.3-.3.8-.3 1.8-.1 1.3-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.8.2.5.4.8.7 1.1.3.3.6.5 1.1.7.3.1.8.3 1.8.3 1.3.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.8-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.3.3-.8.3-1.8.1-1.3.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.8-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.3-.1-.8-.3-1.8-.3-1.3-.1-1.6-.1-4.8-.1Zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.2-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"></path></svg></a>
+        <a href="https://www.instagram.com/cannabica.app/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.8.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.3-.3.8-.3 1.8-.1 1.3-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.8.2.5.4.8.7 1.1.3.3.6.5 1.1.7.3.1.8.3 1.8.3 1.3.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.8-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.3.3-.8.3-1.8.1-1.3.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.8-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.3-.1-.8-.3-1.8-.3-1.3-.1-1.6-.1-4.8-.1Zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.2-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"></path></svg></a>
       </div>
       <a class="btn btn-primary" href="https://plataforma.cannabica.ar/tenant/register" style="padding:8px 16px;font-size:13.5px">Registrate</a>
     </div>
@@ -133,7 +148,7 @@
       <div class="container">
         <img class="hero-img" src="assets/img/isologo-blue.png" alt="Isologo Cannabica">
         <h1>La plataforma que te acompaña en tus <em>ciclos de cultivo</em></h1>
-        <p class="lede">Software libre para el seguimiento y la planificación de cultivos indoor: registrá cada cuidado y mirá crecer tu bitácora, de la germinación a la cosecha.</p>
+        <p class="lede">El registro de tu cultivo indoor: anotá cada cuidado y seguí la evolución de tus plantas, desde la germinación hasta la cosecha.</p>
         <div class="hero-actions">
           <a class="btn btn-primary btn-lg" href="https://plataforma.cannabica.ar/tenant/register">Crear cuenta gratuita</a>
           <a class="btn btn-ghost btn-lg" href="https://plataforma.cannabica.ar/tenant/login">Ingresar a la plataforma</a>
@@ -147,9 +162,9 @@
         <div class="about-grid">
           <div>
             <span class="eyebrow">Acerca del proyecto</span>
-            <h3>Cannabica es una herramienta para ayudarte en tus ciclos de cultivos.</h3>
-            <p class="lead">Creamos una plataforma open source accesible para todos los cultivadores, diseñada para simplificar el seguimiento de cultivos desde la germinación hasta la cosecha. Permite registrar cuidados, generar historiales y optimizar tus ciclos de cultivo.</p>
-            <p class="muted-note">Ya tenemos un bot de Telegram en funcionamiento. Las próximas funciones se van a definir en un roadmap y buscamos el feedback de la comunidad para decidir las futuras actualizaciones.</p>
+            <h2>Cannabica es una herramienta para ayudarte en tus ciclos de cultivos.</h2>
+            <p class="lead">Anotá cada cuidado de tus plantas, desde la germinación hasta la cosecha: un registro ordenado por planta, con fechas y detalles. Es un proyecto en desarrollo activo.</p>
+            <p class="muted-note">Ya tenemos un bot de Telegram en funcionamiento. Lo que sigue lo vamos definiendo de a poco, sumando lo que pidan los que la usan.</p>
           </div>
           <div class="leaf-deco">
             <!-- Ciclo cerrado de 4 etapas: semilla → plántula → vegetativa → floración -->
@@ -247,7 +262,7 @@
           </div>
           <div class="feature">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11h14"></path><path d="M6.8 11 8.6 21h6.8l1.8-10"></path><path d="M12 11v-3.4"></path><path d="M12 8.6c-1.5-.4-2.7-1.3-3.3-3 1.6.4 2.7 1.2 3.3 3Z"></path><path d="M12 7.6c1.5-.5 2.7-1.3 3.3-2.7-1.6.5-2.7 1.4-3.3 2.7Z"></path></svg>
-            <div><h3>Registrar transplantes</h3><p>Seleccioná el tipo de maceta — plástico o geotextil — y la capacidad en litros.</p></div>
+            <div><h3>Registrar trasplantes</h3><p>Seleccioná el tipo de maceta — plástico o geotextil — y la capacidad en litros.</p></div>
           </div>
           <div class="feature">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"></path><circle cx="12" cy="13" r="3"></circle></svg>
@@ -267,7 +282,7 @@
         <div class="cta">
           <div>
             <h2>Empezá hoy a registrar tus cultivos</h2>
-            <p>Registro abierto — creá tu cuenta gratuita y empezá tu bitácora.</p>
+            <p>Registro abierto — creá tu cuenta gratuita y empezá a anotar.</p>
           </div>
           <a class="btn btn-lg" href="https://plataforma.cannabica.ar/tenant/register">Crear cuenta gratuita</a>
         </div>
@@ -279,9 +294,9 @@
     <div class="container">
       <div class="footer-rrss">
         <a href="https://x.com/Cannabicaapp" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.2 2h6.4l4.4 5.9L18.9 2Zm-1.1 18h1.7L7.6 3.7H5.7L17.8 20Z"></path></svg></a>
-        <a href="https://www.instagram.com/cann4bic4.app/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.8.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.3-.3.8-.3 1.8-.1 1.3-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.8.2.5.4.8.7 1.1.3.3.6.5 1.1.7.3.1.8.3 1.8.3 1.3.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.8-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.3.3-.8.3-1.8.1-1.3.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.8-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.3-.1-.8-.3-1.8-.3-1.3-.1-1.6-.1-4.8-.1Zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.2-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"></path></svg></a>
+        <a href="https://www.instagram.com/cannabica.app/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.8.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.3-.3.8-.3 1.8-.1 1.3-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.8.2.5.4.8.7 1.1.3.3.6.5 1.1.7.3.1.8.3 1.8.3 1.3.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.8-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.3.3-.8.3-1.8.1-1.3.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.8-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.3-.1-.8-.3-1.8-.3-1.3-.1-1.6-.1-4.8-.1Zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm5.2-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"></path></svg></a>
       </div>
-      <p class="footer-bottom">© <span>Copyright</span> <strong>Cannabica</strong> — Todos los derechos reservados</p>
+      <p class="footer-bottom">© 2026 <strong>Cannabica</strong></p>
     </div>
   </footer>
 
